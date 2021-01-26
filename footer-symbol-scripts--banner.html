@@ -1,0 +1,35 @@
+<script>
+  ready( function() {
+    setBannerCookie();
+    handleBanners();
+  });
+
+  function ready( callback ) {
+    if (document.readyState != 'loading') callback();
+    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+    else document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') callback();
+    });
+  }
+
+  function setBannerCookie() {
+    if ( Cookies.get( 'banner-lagree213' ) === undefined ) {
+        document.querySelectorAll( '.banner' )[0].classList.add('opened');
+        // cookie expires in 7 days
+        Cookies.set( 'banner-lagree213', true, { expires: 7 } );
+    }
+  }
+
+  function handleBanners() {
+    const banners = document.querySelectorAll( '.banner' );
+    if ( ! banners ) {
+      return;
+    }
+    for ( const banner of banners ) {
+      let button = banner.querySelectorAll( '.banner__close' )[0];
+      button.addEventListener( 'click', function() {
+        banner.classList.remove( 'opened' );
+      });
+    }
+  }
+</script>

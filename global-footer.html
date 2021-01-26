@@ -1,50 +1,161 @@
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+
 <script>
-  const $buoop = {
-    required: { e: -2, c: -20, f: -20, o: -20, o_a: -20, s: -20, y: -20, v: -20, uc: -20, ios: -20, samsung: -20 },
-    text: 'You are using an outdated browser! Please update or switch to a different browser to view this site.',
-    no_permanent_hide: true,
-    insecure: false,
-    unsupported: false,
-    reminder: 0,
-    api: 2019.05,
-  };
-  function $buo() {
-    const e = document.createElement('script');
-    e.src = '//browser-update.org/update.min.js';
-    document.body.appendChild(e);
-  }
-  try {
-    document.addEventListener('DOMContentLoaded', $buo, false);
-  } catch (e) {
-    window.attachEvent('onload', $buo);
-  }
-</script>
-<script>
-  function ready(callback) {
-    if (document.readyState != 'loading') callback();
-    else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
-    else
-      document.attachEvent('onreadystatechange', function () {
-        if (document.readyState == 'complete') callback();
-      });
-  }
-  function openAllExternalsInTabs() {
-    const thisDomain = location.hostname;
-    const externalDomains = `a:not([href*="${thisDomain}"]):not([href^="/"]):not([href^="#"]):not([href^="?"])`;
-    const allExternalLinks = document.querySelectorAll(externalDomains);
-    for (const i in allExternalLinks) {
-      allExternalLinks[i].target = '_blank';
-    }
-  }
-  function addNoReferrer() {
-    const selector = '[target="_blank"]';
-    const externalLinks = document.querySelectorAll(selector);
-    for (const i in externalLinks) {
-      externalLinks[i].rel = 'noreferrer';
-    }
-  }
-  ready(function () {
-    openAllExternalsInTabs();
-    addNoReferrer();
+ready( function() {
+  handleMobileNavState();
+  // addScrollToTopButton();
+});
+
+function ready( callback ) {
+  if (document.readyState != 'loading') callback();
+  else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+  else document.attachEvent('onreadystatechange', function() {
+    if (document.readyState == 'complete') callback();
   });
+}
+
+window.onscroll = function() {
+  scrollFunction();
+}
+
+const siteNavigation = document.getElementById( 'nav' );
+
+function scrollFunction() {
+  setTimeout( function() {
+    if (window.pageYOffset > 550) {
+      siteNavigation.classList.add( 'scrolled' );
+    } else {
+      siteNavigation.classList.remove( 'scrolled' );
+    }
+  }, 350);
+}
+
+function handleMobileNavState() {
+  const hamburger = document.getElementById( 'hamburger' );
+
+  if ( ! hamburger ) {
+    return;
+  }
+
+  hamburger.addEventListener( 'click', toggleMobileMenu );
+
+  function toggleMobileMenu( event ) {
+    document.body.classList.toggle( 'menu-opened' );
+
+    if ( hamburger.getAttribute( 'aria-expanded' ) === 'true' ) {
+      hamburger.setAttribute( 'aria-expanded', 'false' );
+    } else {
+      hamburger.setAttribute( 'aria-expanded', 'true' );
+    }
+  }
+
+  // Remove .menu-opened from body and set aria-expanded to false
+  // when user clicks outside mobile nav
+  document.addEventListener( 'click', function( event ) {
+    const isClickInside = siteNavigation.contains( event.target );
+
+    if ( ! isClickInside ) {
+      document.body.classList.remove( 'menu-opened' );
+      hamburger.setAttribute( 'aria-expanded', 'false' );
+    }
+  } );
+}
+
+function addScrollToTopButton() {
+  const img = document.createElement('img');
+  const btn = document.createElement('a');
+
+  // build img
+  img.src = '//uploads-ssl.webflow.com/5eb043b98cf9c48746832cbb/5ef4d46efa65b49bd9402e0c_back-to-top-outlined.svg';
+
+  // build, style, position btn in corner, hidden for now
+  btn.href = '#';
+  btn.title = 'Back to top';
+  btn.setAttribute('style', 'position:fixed;bottom:10px;right:10px;visibility:hidden;opacity:0;transition:all 250ms ease;');
+
+  // add img inside btn
+  btn.append(img);
+
+  // add btn to bottom of Body
+  document.body.appendChild(btn);
+
+  // scroll up on click
+  btn.addEventListener( 'click', scrollMeUp );
+  function scrollMeUp() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  // show btn when scroll past 1000px from top
+  window.addEventListener('scroll', scrollFunctionButton);
+  function scrollFunctionButton() {
+    setTimeout( function() {
+      if ( window.pageYOffset > 1000 ) {
+        btn.style.visibility = 'visible';
+        btn.style.opacity = '1';
+      } else {
+        btn.style.visibility = 'hidden';
+        btn.style.opacity = '0';
+      }
+    }, 350);
+  }
+}
+</script>
+
+<script>
+var $buoop = {
+  required: {e:-2,c: -20,f: -20,o: -20,o_a: -20,s: -20,y: -20,v: -20,uc: -20,ios: -20,samsung: -20},
+  text: "You are using an outdated browser! Please update or switch to a different browser to view this site.",
+  no_permanent_hide: true,
+  insecure: false,
+  unsupported: false,
+  reminder: 0,
+  api: 2019.05,
+};
+function $buo_f(){
+  var e = document.createElement("script");
+  e.src = "//browser-update.org/update.min.js";
+  document.body.appendChild(e);
+};
+try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+catch(e){window.attachEvent("onload", $buo_f)}
+</script>
+
+<script>
+ready( function() {
+  removeInvisibleElements();
+  openAllExternalsInTabs();
+  addNoReferrer();
+});
+function ready( callback ) {
+  if (document.readyState!='loading') callback();
+  else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+  else document.attachEvent('onreadystatechange', function(){
+    if (document.readyState=='complete') callback();
+  });
+}
+function removeInvisibleElements() {
+  const allWebflowHiddenEls = document.querySelectorAll('.w-condition-invisible');
+  for (let i=0 ; i < allWebflowHiddenEls.length; i++) {
+    allWebflowHiddenEls[i].remove();
+  }
+}
+function openAllExternalsInTabs() {
+  var thisDomain = location.hostname;
+  var externalDomains = 'a:not([href*="' + thisDomain + '"]):not([href^="/"]):not([href^="#"]):not([href^="?"])';
+  var allExternalLinks = document.querySelectorAll( externalDomains );
+  for( var i in allExternalLinks ) {
+    allExternalLinks[i].target = '_blank';
+  }
+}
+function addNoReferrer() {
+  var selector = '[target="_blank"]';
+  var externalLinks = document.querySelectorAll( selector );
+  for( var i in externalLinks) {
+    externalLinks[i].rel = 'noreferrer';
+  }
+}
 </script>

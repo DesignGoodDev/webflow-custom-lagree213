@@ -1,0 +1,96 @@
+<style>
+
+h1:last-child,
+h2:last-child,
+h3:last-child,
+h4:last-child,
+h5:last-child,
+h6:last-child,
+p:last-child {
+  margin-bottom: 0;
+}
+
+p {
+  margin-bottom: 35px;
+}
+
+p + p,
+p + ul,
+p + ol {
+  margin-top: -18px;
+}
+
+a {
+  color: inherit;
+}
+
+p a {
+  font-weight: 600;
+}
+
+.rte--buttons p a:first-child:last-child {
+  display: inline-block;
+  padding: 12px 24px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  font-family: Abel, sans-serif;
+  line-height: 1.125;
+  letter-spacing: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #3a7968;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.bg-teal .rte--buttons p a:first-child:last-child {
+  color: #3a7968;
+  background-color: #8ac7bb;
+}
+.bg-turq .rte--buttons p a:first-child:last-child {
+  color: #8ac7bb;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .w-richtext p a:first-child:last-child {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  h1,
+  h2 {
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+    /* min chars before a hyphen */
+    -webkit-hyphenate-limit-before: 6;
+    /* min chars after a hyphen  */
+    -webkit-hyphenate-limit-after: 3;
+    /* max # consecutive lines ending in hyphens */
+    -webkit-hyphenate-limit-lines: 2;
+    -moz-hyphenate-limit-chars: 6 3 2;
+    -webkit-hyphenate-limit-chars: 6 3 2;
+    -ms-hyphenate-limit-chars: 6 3 2;
+    hyphenate-limit-chars: 6 3 2;
+  }
+}
+</style>

@@ -1,0 +1,43 @@
+<style>
+.banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000000;
+  width: 100%;
+  background-color: #4f9785;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 350ms;
+}
+.home .banner {
+  background-color: rgba(58, 121, 104, 0.85);
+}
+.banner.opened {
+  visibility: visible;
+  opacity: 1;
+}
+.banner__inner {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #fff;
+  text-align: center;
+}
+.banner__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .banner__inner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+</style>
